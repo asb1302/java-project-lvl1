@@ -12,10 +12,8 @@ public class App {
 
         String name = input.nextLine();
 
-        // prints the name
         System.out.println("Hello, " + name + "!");
 
-        // closes the scanner
         input.close();
     }
 }

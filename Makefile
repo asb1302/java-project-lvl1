@@ -21,6 +21,9 @@ check-updates:
 update-deps:
 	./gradlew useLatestVersions
 
+lint:
+	./gradlew checkstyleMain
+
 build-run: build run
 
 run:
