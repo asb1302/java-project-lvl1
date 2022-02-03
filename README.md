@@ -5,4 +5,5 @@
 
 ### Games demo
 
-Even: https://asciinema.org/a/C8752GcYQ4MMaFJJ3GocU97SZ
+* Even: https://asciinema.org/a/C8752GcYQ4MMaFJJ3GocU97SZ
+* Calc: https://asciinema.org/a/d55GMpYWtlR8Vx4U4FLuCrpe0
