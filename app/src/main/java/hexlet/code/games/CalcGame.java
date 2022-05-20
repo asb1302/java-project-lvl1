@@ -10,15 +10,15 @@ public final class CalcGame extends BaseGame implements GameInterface {
 
     @Override
     public void play() {
+        this.greet();
+
         String[] operators = {ADDITION_OPERATOR, SUBTRACTION_OPERATOR, MULTIPLICATION_OPERATOR};
 
-        int correctAnswerCounter = 0;
-
-        while (correctAnswerCounter < this.WIN_CONDITION_COUNTER_LIMIT) {
+        while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
             String randomOperator = operators[new Random().nextInt(operators.length)];
 
-            int firstRandomNumber = new Random().nextInt(this.MAX_RANDOM_NUMBER);
-            int secondRandomNumber = new Random().nextInt(this.MAX_RANDOM_NUMBER);
+            int firstRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
+            int secondRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
             System.out.println("What is the result of the expression?");
 
             switch (randomOperator) {
@@ -30,9 +30,10 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
                     int correctAnswer = firstRandomNumber + secondRandomNumber;
                     if (correctAnswer == userAnswer) {
-                        correctAnswerCounter++;
+                        this.increaseCorrectedAnswersCounter();
                     } else {
-                        System.out.println(this.LOST_MSG);
+                        this.sayGoodbye();
+
                         return;
                     }
                 }
@@ -44,9 +45,9 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
                     int correctAnswer = firstRandomNumber - secondRandomNumber;
                     if (correctAnswer == userAnswer) {
-                        correctAnswerCounter++;
+                        this.increaseCorrectedAnswersCounter();
                     } else {
-                        System.out.println(this.LOST_MSG);
+                        this.sayGoodbye();
                         return;
                     }
                 }
@@ -58,9 +59,10 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
                     int correctAnswer = firstRandomNumber * secondRandomNumber;
                     if (correctAnswer == userAnswer) {
-                        correctAnswerCounter++;
+                        this.increaseCorrectedAnswersCounter();
                     } else {
-                        System.out.println(this.LOST_MSG);
+                        this.sayGoodbye();
+
                         return;
                     }
                 }
@@ -71,6 +73,6 @@ public final class CalcGame extends BaseGame implements GameInterface {
             }
         }
 
-        System.out.println(this.WIN_MSG);
+        this.sayGoodbye();
     }
 }

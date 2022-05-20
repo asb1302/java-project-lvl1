@@ -6,13 +6,13 @@ import java.util.Scanner;
 public final class GCDGame extends BaseGame implements GameInterface {
     @Override
     public void play() {
+        this.greet();
+
         System.out.println("Find the greatest common divisor of given numbers.");
 
-        int correctAnswerCounter = 0;
-
-        while (correctAnswerCounter < this.WIN_CONDITION_COUNTER_LIMIT) {
-            int firstRandomNumber = new Random().nextInt(this.MAX_RANDOM_NUMBER);
-            int secondRandomNumber = new Random().nextInt(this.MAX_RANDOM_NUMBER);
+        while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
+            int firstRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
+            int secondRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
 
             System.out.println("Question: " + firstRandomNumber + " " + secondRandomNumber);
             System.out.print("Your answer: ");
@@ -20,14 +20,15 @@ public final class GCDGame extends BaseGame implements GameInterface {
             int correctAnswer = this.getGcdBySteinsAlgorithm(firstRandomNumber, secondRandomNumber);
 
             if (correctAnswer == userAnswer) {
-                correctAnswerCounter++;
+                this.increaseCorrectedAnswersCounter();
             } else {
-                System.out.println(this.LOST_MSG);
+                this.sayGoodbye();
+
                 return;
             }
         }
 
-        System.out.println(this.WIN_MSG);
+        this.sayGoodbye();
     }
 
     private int getGcdBySteinsAlgorithm(int n1, int n2) {

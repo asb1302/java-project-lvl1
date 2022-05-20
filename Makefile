@@ -27,4 +27,4 @@ lint:
 build-run: build run
 
 run:
-	./gradlew run
+	./gradlew run --console=plain
