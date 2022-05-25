@@ -10,7 +10,7 @@ public final class EvenGame extends BaseGame implements GameInterface {
         System.out.println("Answer 'yes' if number even otherwise answer 'no'. ");
 
         while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
-            int randomNumber = new Random().nextInt(this.getMaxRandomNumber());
+            int randomNumber = new Random().nextInt(this.getMaxRandomNumber()) + 1;
             System.out.println("Question: " + randomNumber);
             String userAnswer = this.getScanner().nextLine();
             String correctAnswer = randomNumber % 2 == 0 ? "yes" : "no";

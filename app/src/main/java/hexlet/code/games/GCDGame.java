@@ -11,8 +11,8 @@ public final class GCDGame extends BaseGame implements GameInterface {
         System.out.println("Find the greatest common divisor of given numbers.");
 
         while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
-            int firstRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
-            int secondRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
+            int firstRandomNumber = new Random().nextInt(this.getMaxRandomNumber()) + 1;
+            int secondRandomNumber = new Random().nextInt(this.getMaxRandomNumber()) + 1;
 
             System.out.println("Question: " + firstRandomNumber + " " + secondRandomNumber);
             System.out.print("Your answer: ");

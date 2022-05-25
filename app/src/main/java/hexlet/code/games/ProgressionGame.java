@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public final class ProgressionGame extends BaseGame implements GameInterface {
-    public static final int MIN_PROGRESSION_SIZE = 5;
-    public static final int MAX_PROGRESSION_SIZE = 10;
+    private static final int MIN_PROGRESSION_SIZE = 5;
+    private static final int MAX_PROGRESSION_SIZE = 10;
 
     private int missedNumber;
     @Override
@@ -34,11 +34,8 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
     }
 
     private void printProgression() {
-        int size =
-                (int) Math.floor(Math.random()
-                        * (MAX_PROGRESSION_SIZE - MIN_PROGRESSION_SIZE + 1) + MIN_PROGRESSION_SIZE + 1) + 1;
-        int randomMissedPosition = (int) Math.floor(Math.random()
-                * (size - MIN_PROGRESSION_SIZE + 1) + MIN_PROGRESSION_SIZE + 1) - 1;
+        int size = MIN_PROGRESSION_SIZE + (int) (Math.random() * MAX_PROGRESSION_SIZE);
+        int randomMissedPosition = (int) (Math.random() * (size));
 
         int step = new Random().nextInt(this.getMaxRandomNumber()) + 1;
 
