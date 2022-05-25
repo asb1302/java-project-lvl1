@@ -5,6 +5,8 @@
 
 ### Games demo
 
-* Even: https://asciinema.org/a/C8752GcYQ4MMaFJJ3GocU97SZ
-* Calc: https://asciinema.org/a/d55GMpYWtlR8Vx4U4FLuCrpe0
-* GDC: https://asciinema.org/a/jT6BAxgIGadHr0EN8Q96fnfWy
+* Even: https://asciinema.org/a/FFFx0oO9xGBr09JZ3zwDBoJLq
+* Calc: https://asciinema.org/a/KBJF2bbAOel78FDDtm6SBT8YQ
+* GDC: https://asciinema.org/a/vp98Wdv5txx5xZZktF30BFQuR
+* Progression: https://asciinema.org/a/URb40VqBhg184HZQBERkSULnF
+* Prime: https://asciinema.org/a/veGgQSHTmnfvyOHBt5kDpHmoH
