@@ -8,8 +8,6 @@ import java.util.Scanner;
 public final class ProgressionGame {
     private static final int MIN_PROGRESSION_SIZE = 5;
     private static final int MAX_PROGRESSION_SIZE = 10;
-
-    private int missedNumber;
     public static void play() {
         String userName = Engine.greet();
 
