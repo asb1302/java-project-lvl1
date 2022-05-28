@@ -1,24 +1,26 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class CalcGame extends BaseGame implements GameInterface {
+public final class CalcGame {
     public static final String MULTIPLICATION_OPERATOR = "*";
     public static final String SUBTRACTION_OPERATOR = "-";
     public static final String ADDITION_OPERATOR = "+";
 
-    @Override
-    public void play() {
-        this.greet();
+    public static void play() {
+        String userName = Engine.greet();
 
         String[] operators = {ADDITION_OPERATOR, SUBTRACTION_OPERATOR, MULTIPLICATION_OPERATOR};
 
-        while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
+        int correctAnswers = 0;
+        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
             String randomOperator = operators[new Random().nextInt(operators.length)];
 
-            int firstRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
-            int secondRandomNumber = new Random().nextInt(this.getMaxRandomNumber());
+            int firstRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber());
+            int secondRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber());
             System.out.println("What is the result of the expression?");
 
             switch (randomOperator) {
@@ -30,9 +32,9 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
                     int correctAnswer = firstRandomNumber + secondRandomNumber;
                     if (correctAnswer == userAnswer) {
-                        this.increaseCorrectedAnswersCounter();
+                        correctAnswers++;
                     } else {
-                        this.sayGoodbye();
+                        Engine.sayGoodbye(userName, correctAnswers);
 
                         return;
                     }
@@ -45,9 +47,9 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
                     int correctAnswer = firstRandomNumber - secondRandomNumber;
                     if (correctAnswer == userAnswer) {
-                        this.increaseCorrectedAnswersCounter();
+                        correctAnswers++;
                     } else {
-                        this.sayGoodbye();
+                        Engine.sayGoodbye(userName, correctAnswers);
                         return;
                     }
                 }
@@ -59,20 +61,18 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
                     int correctAnswer = firstRandomNumber * secondRandomNumber;
                     if (correctAnswer == userAnswer) {
-                        this.increaseCorrectedAnswersCounter();
+                        correctAnswers++;
                     } else {
-                        this.sayGoodbye();
+                        Engine.sayGoodbye(userName, correctAnswers);
 
                         return;
                     }
                 }
 
-                default -> {
-                    System.out.println("Incorrect operator!");
-                }
+                default -> System.out.println("Incorrect operator!");
             }
         }
 
-        this.sayGoodbye();
+        Engine.sayGoodbye(userName, correctAnswers);
     }
 }

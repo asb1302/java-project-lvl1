@@ -1,50 +1,52 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class ProgressionGame extends BaseGame implements GameInterface {
+public final class ProgressionGame {
     private static final int MIN_PROGRESSION_SIZE = 5;
     private static final int MAX_PROGRESSION_SIZE = 10;
 
     private int missedNumber;
-    @Override
-    public void play() {
-        this.greet();
+    public static void play() {
+        String userName = Engine.greet();
 
         System.out.println("What number is missing in this progression?");
 
-        while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
-            this.printProgression();
+        int correctAnswers = 0;
+        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
+            int correctAnswer = ProgressionGame.printProgression();
             int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
-            int correctAnswer = this.missedNumber;
 
             if (correctAnswer == userAnswer) {
                 System.out.println("Correct!");
 
-                this.increaseCorrectedAnswersCounter();
+                correctAnswers++;
             } else {
-                this.sayGoodbye();
+                Engine.sayGoodbye(userName, correctAnswers);
 
                 return;
             }
         }
 
-        this.sayGoodbye();
+        Engine.sayGoodbye(userName, correctAnswers);
     }
 
-    private void printProgression() {
+    private static int printProgression() {
         int size = MIN_PROGRESSION_SIZE + (int) (Math.random() * MAX_PROGRESSION_SIZE);
         int randomMissedPosition = (int) (Math.random() * (size));
 
-        int step = new Random().nextInt(this.getMaxRandomNumber()) + 1;
+        int step = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
 
-        int number = new Random().nextInt(this.getMaxRandomNumber());
+        int number = new Random().nextInt(Engine.getMaxRandomNumber());
 
+        int missedNumber = 0;
         for (int i = 0; i < size; i++) {
             if (i == randomMissedPosition) {
                 System.out.print(".." + " ");
-                this.missedNumber = number;
+                missedNumber = number;
             } else {
                 System.out.print(number + " ");
             }
@@ -53,5 +55,7 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
         }
 
         System.out.println();
+
+        return missedNumber;
     }
 }

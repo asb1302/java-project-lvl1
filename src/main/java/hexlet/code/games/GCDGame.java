@@ -1,37 +1,39 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class GCDGame extends BaseGame implements GameInterface {
-    @Override
-    public void play() {
-        this.greet();
+public final class GCDGame {
+    public static void play() {
+        String userName = Engine.greet();
 
         System.out.println("Find the greatest common divisor of given numbers.");
 
-        while (this.getCorrectAnswerCounter() < this.getWinConditionCounterLimit()) {
-            int firstRandomNumber = new Random().nextInt(this.getMaxRandomNumber()) + 1;
-            int secondRandomNumber = new Random().nextInt(this.getMaxRandomNumber()) + 1;
+        int correctAnswers = 0;
+        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
+            int firstRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
+            int secondRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
 
             System.out.println("Question: " + firstRandomNumber + " " + secondRandomNumber);
             System.out.print("Your answer: ");
             int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
-            int correctAnswer = this.getGcdBySteinsAlgorithm(firstRandomNumber, secondRandomNumber);
+            int correctAnswer = GCDGame.getGcdBySteinsAlgorithm(firstRandomNumber, secondRandomNumber);
 
             if (correctAnswer == userAnswer) {
-                this.increaseCorrectedAnswersCounter();
+                correctAnswers++;
             } else {
-                this.sayGoodbye();
+                Engine.sayGoodbye(userName, correctAnswers);
 
                 return;
             }
         }
 
-        this.sayGoodbye();
+        Engine.sayGoodbye(userName, correctAnswers);
     }
 
-    private int getGcdBySteinsAlgorithm(int n1, int n2) {
+    private static int getGcdBySteinsAlgorithm(int n1, int n2) {
         if (n1 == 0) {
             return n2;
         }
