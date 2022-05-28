@@ -5,6 +5,8 @@ import hexlet.code.Engine;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public final class CalcGame {
     public static final String MULTIPLICATION_OPERATOR = "*";
     public static final String SUBTRACTION_OPERATOR = "-";
@@ -29,7 +31,7 @@ public final class CalcGame {
                             "Question: " + firstRandomNumber + " " + ADDITION_OPERATOR + " " + secondRandomNumber
                     );
                     System.out.print("Your answer: ");
-                    int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
+                    int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
                     int correctAnswer = firstRandomNumber + secondRandomNumber;
                     if (correctAnswer == userAnswer) {
                         correctAnswers++;
@@ -44,7 +46,7 @@ public final class CalcGame {
                             "Question: " + firstRandomNumber + " " + SUBTRACTION_OPERATOR + " " + secondRandomNumber
                     );
                     System.out.print("Your answer: ");
-                    int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
+                    int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
                     int correctAnswer = firstRandomNumber - secondRandomNumber;
                     if (correctAnswer == userAnswer) {
                         correctAnswers++;
@@ -58,7 +60,7 @@ public final class CalcGame {
                             "Question: " + firstRandomNumber + " " + MULTIPLICATION_OPERATOR + " " + secondRandomNumber
                     );
                     System.out.print("Your answer: ");
-                    int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
+                    int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
                     int correctAnswer = firstRandomNumber * secondRandomNumber;
                     if (correctAnswer == userAnswer) {
                         correctAnswers++;

@@ -2,20 +2,22 @@ package hexlet.code;
 
 import java.util.Scanner;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class Engine {
     public static final int MAX_RANDOM_NUMBER = 10;
 
     public static final int WIN_CONDITIONS_COUNTER_LIMIT = 3;
 
     public static Scanner getScanner() {
-        return new Scanner(System.in);
+        return new Scanner(System.in, UTF_8.name());
     }
 
     public static String greet() {
         System.out.println("Welcome to the Brain Games!");
         System.out.print("May I have your name? ");
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, UTF_8.name());
 
         String userName = scanner.nextLine();
 

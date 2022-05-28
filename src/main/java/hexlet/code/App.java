@@ -9,6 +9,8 @@ import hexlet.code.games.PrimeGame;
 
 import java.util.Scanner;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class App {
     public static final int GREET_GAME_NUM = 1;
     public static final int EVEN_GAME_NUM = 2;
@@ -29,7 +31,7 @@ public class App {
         System.out.println(EXIT_NUM + " - Exit");
         System.out.print("Your choice: ");
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, UTF_8.name());
 
         String input = scanner.nextLine();
 

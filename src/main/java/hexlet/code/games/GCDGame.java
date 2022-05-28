@@ -5,6 +5,8 @@ import hexlet.code.Engine;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public final class GCDGame {
     public static void play() {
         String userName = Engine.greet();
@@ -18,7 +20,7 @@ public final class GCDGame {
 
             System.out.println("Question: " + firstRandomNumber + " " + secondRandomNumber);
             System.out.print("Your answer: ");
-            int userAnswer = Integer.parseInt((new Scanner(System.in)).nextLine());
+            int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
             int correctAnswer = GCDGame.getGcdBySteinsAlgorithm(firstRandomNumber, secondRandomNumber);
 
             if (correctAnswer == userAnswer) {
