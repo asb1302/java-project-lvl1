@@ -35,38 +35,36 @@ public final class GCDGame {
         Engine.sayGoodbye(userName, correctAnswers);
     }
 
-    private static int getGcdBySteinsAlgorithm(int n1, int n2) {
-        if (n1 == 0) {
-            return n2;
+    private static int getGcdBySteinsAlgorithm(int number1, int number2) {
+        if (number1 == 0) {
+            return number2;
         }
 
-        if (n2 == 0) {
-            return n1;
+        if (number2 == 0) {
+            return number1;
         }
 
         int n;
-        for (n = 0; ((n1 | n2) & 1) == 0; n++) {
-            n1 >>= 1;
-            n2 >>= 1;
+        for (n = 0; ((number1 | number2) & 1) == 0; n++) {
+            number1 >>= 1;
+            number2 >>= 1;
         }
 
-        while ((n1 & 1) == 0) {
-            n1 >>= 1;
+        while ((number1 & 1) == 0) {
+            number1 >>= 1;
         }
-
         do {
-            while ((n2 & 1) == 0) {
-                n2 >>= 1;
+            while ((number2 & 1) == 0) {
+                number2 >>= 1;
             }
-
-            if (n1 > n2) {
-                int temp = n1;
-                n1 = n2;
-                n2 = temp;
+            if (number1 > number2) {
+                int temp = number1;
+                number1 = number2;
+                number2 = temp;
             }
-            n2 = (n2 - n1);
-        } while (n2 != 0);
+            number2 = (number2 - number1);
+        } while (number2 != 0);
 
-        return n1 << n;
+        return number1 << n;
     }
 }
