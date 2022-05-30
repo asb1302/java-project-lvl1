@@ -31,6 +31,10 @@ public final class PrimeGame {
     }
 
     private static boolean checkNumberIsPrime(int number) {
+        if (number == 1) {
+            return false;
+        }
+
         boolean check = true;
 
         for (int i = 2; i < number; i++) {
