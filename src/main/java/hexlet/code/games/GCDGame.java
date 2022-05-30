@@ -21,7 +21,7 @@ public final class GCDGame {
             System.out.println("Question: " + firstRandomNumber + " " + secondRandomNumber);
             System.out.print("Your answer: ");
             int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
-            int correctAnswer = GCDGame.getGcdBySteinsAlgorithm(firstRandomNumber, secondRandomNumber);
+            int correctAnswer = GCDGame.gcdByEuclidsAlgorithm(firstRandomNumber, secondRandomNumber);
 
             if (correctAnswer == userAnswer) {
                 correctAnswers++;
@@ -35,36 +35,11 @@ public final class GCDGame {
         Engine.sayGoodbye(userName, correctAnswers);
     }
 
-    private static int getGcdBySteinsAlgorithm(int number1, int number2) {
-        if (number1 == 0) {
-            return number2;
+    private static int gcdByEuclidsAlgorithm(int n1, int n2) {
+        if (n2 == 0) {
+            return n1;
         }
 
-        if (number2 == 0) {
-            return number1;
-        }
-
-        int n;
-        for (n = 0; ((number1 | number2) & 1) == 0; n++) {
-            number1 >>= 1;
-            number2 >>= 1;
-        }
-
-        while ((number1 & 1) == 0) {
-            number1 >>= 1;
-        }
-        do {
-            while ((number2 & 1) == 0) {
-                number2 >>= 1;
-            }
-            if (number1 > number2) {
-                int temp = number1;
-                number1 = number2;
-                number2 = temp;
-            }
-            number2 = (number2 - number1);
-        } while (number2 != 0);
-
-        return number1 << n;
+        return gcdByEuclidsAlgorithm(n2, n1 % n2);
     }
 }
