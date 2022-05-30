@@ -43,6 +43,7 @@ public final class ProgressionGame {
         int number = new Random().nextInt(Engine.getMaxRandomNumber());
 
         int missedNumber = 0;
+        System.out.print("Question: ");
         for (int i = 0; i < size; i++) {
             if (i == randomMissedPosition) {
                 System.out.print(".." + " ");
