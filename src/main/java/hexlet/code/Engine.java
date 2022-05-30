@@ -30,7 +30,7 @@ public class Engine {
         if (correctAnswers >= WIN_CONDITIONS_COUNTER_LIMIT) {
             System.out.println("Congratulations, " + userName + "!");
         } else {
-            System.out.println("Sorry, " + userName + ", you lost ;(");
+            System.out.println("Let's try again, " + userName + "!");
         }
     }
 
