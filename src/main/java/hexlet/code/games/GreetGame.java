@@ -1,9 +1,23 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
+public final class GreetGame implements GameInterface {
+    @Override
+    public String getPreviewQuestion() {
+        return null;
+    }
 
-public final class GreetGame {
-    public static void play() {
-        Engine.greet();
+    @Override
+    public String getGameQuestion() {
+        return null;
+    }
+
+    @Override
+    public int getWinConditionCounterLimit() {
+        return 0;
+    }
+
+    @Override
+    public boolean userAnswerIsCorrect(String userAnswer) {
+        return false;
     }
 }

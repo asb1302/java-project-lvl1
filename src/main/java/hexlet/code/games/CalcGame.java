@@ -1,80 +1,57 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
+import hexlet.code.services.RandomNumberGenerator;
 
-import java.util.Random;
-import java.util.Scanner;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-public final class CalcGame {
+public final class CalcGame implements GameInterface {
     public static final String MULTIPLICATION_OPERATOR = "*";
     public static final String SUBTRACTION_OPERATOR = "-";
     public static final String ADDITION_OPERATOR = "+";
+    private int firstRandomNumber;
+    private int secondRandomNumber;
+    private String randomOperator;
 
-    public static void play() {
-        String userName = Engine.greet();
+    @Override
+    public String getPreviewQuestion() {
+        return "What is the result of the expression?";
+    }
 
+    @Override
+    public String getGameQuestion() {
         String[] operators = {ADDITION_OPERATOR, SUBTRACTION_OPERATOR, MULTIPLICATION_OPERATOR};
 
-        int correctAnswers = 0;
-        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
-            String randomOperator = operators[new Random().nextInt(operators.length)];
+        this.randomOperator = operators[
+            new RandomNumberGenerator()
+                    .setMinRandomNumber(0)
+                    .setMaxRandomNumber(operators.length)
+                    .getRandomNumber()
+            ];
+        this.firstRandomNumber = new RandomNumberGenerator().getRandomNumber();
+        this.secondRandomNumber = new RandomNumberGenerator().getRandomNumber();
 
-            int firstRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber());
-            int secondRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber());
-            System.out.println("What is the result of the expression?");
+        return "Question: " + firstRandomNumber + " " + randomOperator + " " + secondRandomNumber + "\n" + "Answer: ";
+    }
 
-            switch (randomOperator) {
-                case ADDITION_OPERATOR -> {
-                    System.out.println(
-                            "Question: " + firstRandomNumber + " " + ADDITION_OPERATOR + " " + secondRandomNumber
-                    );
-                    System.out.print("Your answer: ");
-                    int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
-                    int correctAnswer = firstRandomNumber + secondRandomNumber;
-                    if (correctAnswer == userAnswer) {
-                        correctAnswers++;
-                    } else {
-                        Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public int getWinConditionCounterLimit() {
+        return WIN_CONDITION_COUNTER_LIMIT;
+    }
 
-                        return;
-                    }
-                }
-                case SUBTRACTION_OPERATOR -> {
-                    System.out.println(
-                            "Question: " + firstRandomNumber + " " + SUBTRACTION_OPERATOR + " " + secondRandomNumber
-                    );
-                    System.out.print("Your answer: ");
-                    int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
-                    int correctAnswer = firstRandomNumber - secondRandomNumber;
-                    if (correctAnswer == userAnswer) {
-                        correctAnswers++;
-                    } else {
-                        Engine.sayGoodbye(userName, correctAnswers);
-                        return;
-                    }
-                }
-                case MULTIPLICATION_OPERATOR -> {
-                    System.out.println(
-                            "Question: " + firstRandomNumber + " " + MULTIPLICATION_OPERATOR + " " + secondRandomNumber
-                    );
-                    System.out.print("Your answer: ");
-                    int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
-                    int correctAnswer = firstRandomNumber * secondRandomNumber;
-                    if (correctAnswer == userAnswer) {
-                        correctAnswers++;
-                    } else {
-                        Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public boolean userAnswerIsCorrect(String userAnswer) {
+        switch (this.randomOperator) {
+            case ADDITION_OPERATOR -> {
+                return firstRandomNumber + secondRandomNumber == Integer.parseInt(userAnswer);
+            }
+            case SUBTRACTION_OPERATOR -> {
+                return firstRandomNumber - secondRandomNumber == Integer.parseInt(userAnswer);
+            }
+            case MULTIPLICATION_OPERATOR -> {
+                return firstRandomNumber * secondRandomNumber == Integer.parseInt(userAnswer);
+            }
 
-                        return;
-                    }
-                }
-
-                default -> System.out.println("Incorrect operator!");
+            default -> {
+                return false;
             }
         }
-
-        Engine.sayGoodbye(userName, correctAnswers);
     }
 }

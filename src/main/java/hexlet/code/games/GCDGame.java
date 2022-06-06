@@ -1,38 +1,35 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
+import hexlet.code.services.RandomNumberGenerator;
 
-import java.util.Random;
-import java.util.Scanner;
+public final class GCDGame implements GameInterface {
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+    private int firstRandomNumber;
+    private int secondRandomNumber;
 
-public final class GCDGame {
-    public static void play() {
-        String userName = Engine.greet();
+    @Override
+    public String getPreviewQuestion() {
+        return "Find the greatest common divisor of given numbers.";
+    }
 
-        System.out.println("Find the greatest common divisor of given numbers.");
+    @Override
+    public String getGameQuestion() {
+        this.firstRandomNumber = new RandomNumberGenerator().getRandomNumber();
+        this.secondRandomNumber = new RandomNumberGenerator().getRandomNumber();
 
-        int correctAnswers = 0;
-        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
-            int firstRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
-            int secondRandomNumber = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
+        return "Question: " + firstRandomNumber + " " + secondRandomNumber + "\n";
+    }
 
-            System.out.println("Question: " + firstRandomNumber + " " + secondRandomNumber);
-            System.out.print("Your answer: ");
-            int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
-            int correctAnswer = GCDGame.gcdByEuclidsAlgorithm(firstRandomNumber, secondRandomNumber);
+    @Override
+    public int getWinConditionCounterLimit() {
+        return WIN_CONDITION_COUNTER_LIMIT;
+    }
 
-            if (correctAnswer == userAnswer) {
-                correctAnswers++;
-            } else {
-                Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public boolean userAnswerIsCorrect(String userAnswer) {
+        int correctAnswer = GCDGame.gcdByEuclidsAlgorithm(this.firstRandomNumber, this.secondRandomNumber);
 
-                return;
-            }
-        }
-
-        Engine.sayGoodbye(userName, correctAnswers);
+        return correctAnswer == Integer.parseInt(userAnswer);
     }
 
     private static int gcdByEuclidsAlgorithm(int n1, int n2) {

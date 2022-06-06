@@ -1,32 +1,30 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
+import hexlet.code.services.RandomNumberGenerator;
+import java.util.Objects;
 
-import java.util.Random;
+public final class EvenGame implements GameInterface {
+    private int randomNumber;
 
-public final class EvenGame {
-    public static void play() {
-        String userName = Engine.greet();
+    @Override
+    public String getPreviewQuestion() {
+        return "Answer 'yes' if number even otherwise answer 'no'.";
+    }
 
-        System.out.println("Answer 'yes' if number even otherwise answer 'no'. ");
+    @Override
+    public String getGameQuestion() {
+        this.randomNumber = new RandomNumberGenerator().getRandomNumber();
 
-        int correctAnswers = 0;
-        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
-            int randomNumber = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
-            System.out.println("Question: " + randomNumber);
-            String userAnswer = Engine.getScanner().nextLine();
-            String correctAnswer = randomNumber % 2 == 0 ? "yes" : "no";
+        return "Question: " + randomNumber + "\n";
+    }
 
-            if (correctAnswer.equals(userAnswer)) {
-                System.out.println("Correct!");
-                correctAnswers++;
-            } else {
-                Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public int getWinConditionCounterLimit() {
+        return WIN_CONDITION_COUNTER_LIMIT;
+    }
 
-                return;
-            }
-        }
-
-        Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public boolean userAnswerIsCorrect(String userAnswer) {
+        return Objects.equals(userAnswer, randomNumber % 2 == 0 ? "yes" : "no");
     }
 }

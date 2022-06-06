@@ -1,36 +1,35 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
+import hexlet.code.services.RandomNumberGenerator;
+import java.util.Objects;
 
-import java.util.Random;
+public final class PrimeGame implements GameInterface {
 
-public final class PrimeGame {
-    public static void play() {
-        String userName = Engine.greet();
+    private int randomNumber;
 
-        System.out.println("Answer 'yes' if number prime otherwise answer 'no'. ");
-
-        int correctAnswers = 0;
-        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
-            int randomNumber = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
-            System.out.println("Question: " + randomNumber);
-            String userAnswer = Engine.getScanner().nextLine();
-            String correctAnswer = PrimeGame.checkNumberIsPrime(randomNumber) ? "yes" : "no";
-
-            if (correctAnswer.equals(userAnswer)) {
-                System.out.println("Correct!");
-                correctAnswers++;
-            } else {
-                Engine.sayGoodbye(userName, correctAnswers);
-
-                return;
-            }
-        }
-
-        Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public String getPreviewQuestion() {
+        return "Answer 'yes' if number prime otherwise answer 'no'.";
     }
 
-    private static boolean checkNumberIsPrime(int number) {
+    @Override
+    public String getGameQuestion() {
+        this.randomNumber = new RandomNumberGenerator().getRandomNumber();
+
+        return "Question: " + randomNumber + "\n";
+    }
+
+    @Override
+    public int getWinConditionCounterLimit() {
+        return WIN_CONDITION_COUNTER_LIMIT;
+    }
+
+    @Override
+    public boolean userAnswerIsCorrect(String userAnswer) {
+        return Objects.equals(userAnswer, this.checkNumberIsPrime(randomNumber) ? "yes" : "no");
+    }
+
+    private boolean checkNumberIsPrime(int number) {
         if (number == 1) {
             return false;
         }

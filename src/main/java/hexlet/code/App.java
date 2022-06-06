@@ -6,6 +6,7 @@ import hexlet.code.games.EvenGame;
 import hexlet.code.games.GCDGame;
 import hexlet.code.games.CalcGame;
 import hexlet.code.games.PrimeGame;
+import hexlet.code.games.GameInterface;
 
 import java.util.Scanner;
 
@@ -37,25 +38,40 @@ public class App {
 
         try {
             int choice = Integer.parseInt(input);
+            GameEngineInterface engine = new Engine();
 
             switch (choice) {
                 case GREET_GAME_NUM -> {
-                    GreetGame.play();
+                    GameInterface game = new GreetGame();
+
+                    engine.play(game);
                 }
                 case EVEN_GAME_NUM -> {
-                    EvenGame.play();
+                    GameInterface game = new EvenGame();
+
+                    engine.play(game);
                 }
                 case CALC_GAME_NUM -> {
-                    CalcGame.play();
+                    GameInterface game = new CalcGame();
+
+                    engine.play(game);
                 }
+
                 case GCD_GAME_NUM -> {
-                    GCDGame.play();
+                    GameInterface game = new GCDGame();
+
+                    engine.play(game);
                 }
+
                 case PROGRESSION_GAME_NUM -> {
-                    ProgressionGame.play();
+                    GameInterface game = new ProgressionGame();
+
+                    engine.play(game);
                 }
                 case PRIME_GAME_NUM -> {
-                    PrimeGame.play();
+                    GameInterface game = new PrimeGame();
+
+                    engine.play(game);
                 }
                 case EXIT_NUM -> {
                     System.out.println("Bye!");
