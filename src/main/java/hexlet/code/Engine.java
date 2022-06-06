@@ -1,19 +1,48 @@
 package hexlet.code;
 
+import hexlet.code.games.GameInterface;
+
 import java.util.Scanner;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class Engine {
-    public static final int MAX_RANDOM_NUMBER = 10;
+public final class Engine implements GameEngineInterface {
+    @Override
+    public void play(GameInterface game) {
+        String username = this.greet();
 
-    public static final int WIN_CONDITIONS_COUNTER_LIMIT = 3;
+        String preview = game.getPreview();
 
-    public static Scanner getScanner() {
+        if (null == preview) {
+            return;
+        }
+
+        System.out.println(preview);
+
+        int correctAnswers = 0;
+        while (correctAnswers < game.getWinConditionCounterLimit()) {
+            System.out.print(game.getQuestion());
+            String userAnswer = this.getScanner().nextLine();
+
+            if (game.userAnswerIsCorrect(userAnswer)) {
+                System.out.println("Correct!");
+
+                correctAnswers++;
+            } else {
+                this.sayGoodbye(username, false);
+
+                return;
+            }
+        }
+
+        this.sayGoodbye(username, true);
+    }
+
+    private Scanner getScanner() {
         return new Scanner(System.in, UTF_8.name());
     }
 
-    public static String greet() {
+    private String greet() {
         System.out.println("Welcome to the Brain Games!");
         System.out.print("May I have your name? ");
 
@@ -26,19 +55,11 @@ public class Engine {
         return userName;
     }
 
-    public static void sayGoodbye(String userName, int correctAnswers) {
-        if (correctAnswers >= WIN_CONDITIONS_COUNTER_LIMIT) {
+    private void sayGoodbye(String userName, boolean gameIsWon) {
+        if (gameIsWon) {
             System.out.println("Congratulations, " + userName + "!");
         } else {
             System.out.println("Let's try again, " + userName + "!");
         }
-    }
-
-    public static int getMaxRandomNumber() {
-        return MAX_RANDOM_NUMBER;
-    }
-
-    public static int getWinConditionCounterLimit() {
-        return WIN_CONDITIONS_COUNTER_LIMIT;
     }
 }

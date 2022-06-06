@@ -1,62 +1,57 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
+import hexlet.code.services.RandomNumberGenerator;
 
-import java.util.Random;
-import java.util.Scanner;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-public final class ProgressionGame {
+public final class ProgressionGame implements GameInterface {
     private static final int MIN_PROGRESSION_SIZE = 5;
     private static final int MAX_PROGRESSION_SIZE = 10;
-    public static void play() {
-        String userName = Engine.greet();
+    private int missedNumber;
 
-        System.out.println("What number is missing in this progression?");
-
-        int correctAnswers = 0;
-        while (correctAnswers < Engine.getWinConditionCounterLimit()) {
-            int correctAnswer = ProgressionGame.printProgression();
-            int userAnswer = Integer.parseInt(new Scanner(System.in, UTF_8.name()).nextLine());
-
-            if (correctAnswer == userAnswer) {
-                System.out.println("Correct!");
-
-                correctAnswers++;
-            } else {
-                Engine.sayGoodbye(userName, correctAnswers);
-
-                return;
-            }
-        }
-
-        Engine.sayGoodbye(userName, correctAnswers);
+    @Override
+    public String getPreview() {
+        return "What number is missing in this progression?";
     }
 
-    private static int printProgression() {
-        int size = MIN_PROGRESSION_SIZE + (int) (Math.random() * MAX_PROGRESSION_SIZE);
-        int randomMissedPosition = (int) (Math.random() * size);
+    @Override
+    public String getQuestion() {
+        int size = new RandomNumberGenerator()
+            .setMinRandomNumber(MIN_PROGRESSION_SIZE)
+            .setMaxRandomNumber(MAX_PROGRESSION_SIZE)
+            .getRandomNumber();
+        int randomMissedPosition = new RandomNumberGenerator()
+            .setMinRandomNumber(0)
+            .setMaxRandomNumber(size)
+            .getRandomNumber();
 
-        int step = new Random().nextInt(Engine.getMaxRandomNumber()) + 1;
+        int step = new RandomNumberGenerator().getRandomNumber();
+        int number = new RandomNumberGenerator().getRandomNumber();
 
-        int number = new Random().nextInt(Engine.getMaxRandomNumber());
+        return "Question: " + this.printProgression(size, step, number, randomMissedPosition) + "\n" + "Your answer: ";
+    }
 
-        int missedNumber = 0;
-        System.out.print("Question: ");
+    @Override
+    public int getWinConditionCounterLimit() {
+        return WIN_CONDITION_COUNTER_LIMIT;
+    }
+
+    @Override
+    public boolean userAnswerIsCorrect(String userAnswer) {
+        return this.missedNumber == Integer.parseInt(userAnswer);
+    }
+
+    private String printProgression(int size, int step, int number, int randomMissedPosition) {
+        StringBuilder progressionStr = new StringBuilder();
         for (int i = 0; i < size; i++) {
             if (i == randomMissedPosition) {
-                System.out.print(".." + " ");
-                missedNumber = number;
+                progressionStr.append(".." + " ");
+                this.missedNumber = number;
             } else {
-                System.out.print(number + " ");
+                progressionStr.append(number).append(" ");
             }
 
             number += step;
         }
 
-        System.out.println();
-
-        return missedNumber;
+        return progressionStr.toString();
     }
 }
