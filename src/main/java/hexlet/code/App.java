@@ -13,13 +13,13 @@ import java.util.Scanner;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class App {
-    public static final int GREET_GAME_NUM = 1;
-    public static final int EVEN_GAME_NUM = 2;
-    public static final int CALC_GAME_NUM = 3;
-    public static final int GCD_GAME_NUM = 4;
-    public static final int PROGRESSION_GAME_NUM = 5;
-    public static final int PRIME_GAME_NUM = 6;
-    public static final int EXIT_NUM = 0;
+    public static final String GREET_GAME_NUM = "1";
+    public static final String EVEN_GAME_NUM = "2";
+    public static final String CALC_GAME_NUM = "3";
+    public static final String GCD_GAME_NUM = "4";
+    public static final String PROGRESSION_GAME_NUM = "5";
+    public static final String PRIME_GAME_NUM = "6";
+    public static final String EXIT_NUM = "0";
 
     public static void main(String[] args) {
         System.out.println("Please enter the game number and press Enter.");
@@ -37,41 +37,38 @@ public class App {
         String input = scanner.nextLine();
 
         try {
-            int choice = Integer.parseInt(input);
-            GameEngineInterface engine = new Engine();
-
-            switch (choice) {
+            switch (input) {
                 case GREET_GAME_NUM -> {
                     GameInterface game = new GreetGame();
 
-                    engine.play(game);
+                    game.play();
                 }
                 case EVEN_GAME_NUM -> {
                     GameInterface game = new EvenGame();
 
-                    engine.play(game);
+                    game.play();
                 }
                 case CALC_GAME_NUM -> {
                     GameInterface game = new CalcGame();
 
-                    engine.play(game);
+                    game.play();
                 }
 
                 case GCD_GAME_NUM -> {
                     GameInterface game = new GCDGame();
 
-                    engine.play(game);
+                    game.play();
                 }
 
                 case PROGRESSION_GAME_NUM -> {
                     GameInterface game = new ProgressionGame();
 
-                    engine.play(game);
+                    game.play();
                 }
                 case PRIME_GAME_NUM -> {
                     GameInterface game = new PrimeGame();
 
-                    engine.play(game);
+                    game.play();
                 }
                 case EXIT_NUM -> {
                     System.out.println("Bye!");

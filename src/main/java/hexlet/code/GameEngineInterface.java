@@ -1,7 +1,9 @@
 package hexlet.code;
 
-import hexlet.code.games.GameInterface;
-
 public interface GameEngineInterface {
-    void play(GameInterface game);
+//    void play(GameInterface game);
+
+    // Тут все методы для расчета выйгрышла
+
+    // оставить только метод execute
 }

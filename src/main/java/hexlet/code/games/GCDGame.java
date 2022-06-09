@@ -1,11 +1,33 @@
 package hexlet.code.games;
 
+import hexlet.code.DTO.GameInfoDTO;
+import hexlet.code.DTO.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
+import java.util.Objects;
 
-public final class GCDGame implements GameInterface {
+public final class GCDGame extends BaseGame implements GameInterface {
+    @Override
+    public void play() {
+        for (int i = 0; i < this.BASIC_GAME_COUNT; i++) {
+            GameInfoDTO gameInfoDTO = new GameInfoDTO();
+            gameInfoDTO.setPreview(this.getPreview());
 
-    private int firstRandomNumber;
-    private int secondRandomNumber;
+            int firstRandomNumber = new RandomNumberGenerator().getRandomNumber();
+            int secondRandomNumber = new RandomNumberGenerator().getRandomNumber();
+
+            String questionParam = firstRandomNumber + " " + secondRandomNumber;
+            gameInfoDTO.setQuestion(this.getQuestion(questionParam));
+
+            int correctAnswer = gcdByEuclidsAlgorithm(firstRandomNumber, secondRandomNumber);
+
+            gameInfoDTO.setAnswer(Integer.toString(correctAnswer));
+            gameInfoDTO.setRule(this.getRule());
+
+            this.getGamesList().add(gameInfoDTO);
+        }
+
+        this.getEngine().execute(this.getGamesList());
+    }
 
     @Override
     public String getPreview() {
@@ -13,23 +35,13 @@ public final class GCDGame implements GameInterface {
     }
 
     @Override
-    public String getQuestion() {
-        this.firstRandomNumber = new RandomNumberGenerator().getRandomNumber();
-        this.secondRandomNumber = new RandomNumberGenerator().getRandomNumber();
-
-        return "Question: " + firstRandomNumber + " " + secondRandomNumber + "\n";
+    public String getQuestion(String param) {
+        return "Question: " + param + " " + "\n";
     }
 
     @Override
-    public int getWinConditionCounterLimit() {
-        return WIN_CONDITION_COUNTER_LIMIT;
-    }
-
-    @Override
-    public boolean userAnswerIsCorrect(String userAnswer) {
-        int correctAnswer = GCDGame.gcdByEuclidsAlgorithm(this.firstRandomNumber, this.secondRandomNumber);
-
-        return correctAnswer == Integer.parseInt(userAnswer);
+    protected GameRule getRule() {
+        return Objects::equals;
     }
 
     private static int gcdByEuclidsAlgorithm(int n1, int n2) {

@@ -1,30 +1,43 @@
 package hexlet.code.games;
 
+import hexlet.code.DTO.GameInfoDTO;
+import hexlet.code.DTO.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
+
 import java.util.Objects;
 
-public final class EvenGame implements GameInterface {
-    private int randomNumber;
+public final class EvenGame extends BaseGame implements GameInterface {
+    @Override
+    public void play() {
+        for (int i = 0; i < this.BASIC_GAME_COUNT; i++) {
+            GameInfoDTO gameInfoDTO = new GameInfoDTO();
+            gameInfoDTO.setPreview(this.getPreview());
+
+            String questionParam = new RandomNumberGenerator().getRandomNumber().toString();
+            gameInfoDTO.setQuestion(this.getQuestion(questionParam));
+
+            String correctAnswer = Integer.parseInt(questionParam) % 2 == 0 ? "yes" : "no";
+
+            gameInfoDTO.setAnswer(correctAnswer);
+            gameInfoDTO.setRule(this.getRule());
+
+            this.getGamesList().add(gameInfoDTO);
+        }
+
+        this.getEngine().execute(this.getGamesList());
+    }
 
     @Override
-    public String getPreview() {
+    protected String getPreview() {
         return "Answer 'yes' if number even otherwise answer 'no'.";
     }
-
     @Override
-    public String getQuestion() {
-        this.randomNumber = new RandomNumberGenerator().getRandomNumber();
-
-        return "Question: " + randomNumber + "\n";
+    protected String getQuestion(String param) {
+        return "Question: " + param + "\n";
     }
 
     @Override
-    public int getWinConditionCounterLimit() {
-        return WIN_CONDITION_COUNTER_LIMIT;
-    }
-
-    @Override
-    public boolean userAnswerIsCorrect(String userAnswer) {
-        return Objects.equals(userAnswer, randomNumber % 2 == 0 ? "yes" : "no");
+    protected GameRule getRule() {
+        return Objects::equals;
     }
 }

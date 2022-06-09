@@ -1,11 +1,45 @@
 package hexlet.code.games;
 
+import hexlet.code.DTO.GameInfoDTO;
+import hexlet.code.DTO.GameRule;
+import hexlet.code.DTO.Progression;
 import hexlet.code.services.RandomNumberGenerator;
 
-public final class ProgressionGame implements GameInterface {
+import java.util.Objects;
+
+public final class ProgressionGame extends BaseGame implements GameInterface {
     private static final int MIN_PROGRESSION_SIZE = 5;
     private static final int MAX_PROGRESSION_SIZE = 10;
-    private int missedNumber;
+
+    @Override
+    public void play() {
+        for (int i = 0; i < this.BASIC_GAME_COUNT; i++) {
+            GameInfoDTO gameInfoDTO = new GameInfoDTO();
+            gameInfoDTO.setPreview(this.getPreview());
+
+            int size = new RandomNumberGenerator()
+                    .setMinRandomNumber(MIN_PROGRESSION_SIZE)
+                    .setMaxRandomNumber(MAX_PROGRESSION_SIZE)
+                    .getRandomNumber();
+            int randomMissedPosition = new RandomNumberGenerator()
+                    .setMinRandomNumber(0)
+                    .setMaxRandomNumber(size)
+                    .getRandomNumber();
+            int step = new RandomNumberGenerator().getRandomNumber();
+            int number = new RandomNumberGenerator().getRandomNumber();
+
+            Progression progression = this.printProgression(size, step, number, randomMissedPosition);
+            gameInfoDTO.setQuestion(this.getQuestion(progression.getProgression()));
+
+            gameInfoDTO.setAnswer(progression.getMissedNumber().toString());
+
+            gameInfoDTO.setRule(this.getRule());
+
+            this.getGamesList().add(gameInfoDTO);
+        }
+
+        this.getEngine().execute(this.getGamesList());
+    }
 
     @Override
     public String getPreview() {
@@ -13,38 +47,24 @@ public final class ProgressionGame implements GameInterface {
     }
 
     @Override
-    public String getQuestion() {
-        int size = new RandomNumberGenerator()
-            .setMinRandomNumber(MIN_PROGRESSION_SIZE)
-            .setMaxRandomNumber(MAX_PROGRESSION_SIZE)
-            .getRandomNumber();
-        int randomMissedPosition = new RandomNumberGenerator()
-            .setMinRandomNumber(0)
-            .setMaxRandomNumber(size)
-            .getRandomNumber();
-
-        int step = new RandomNumberGenerator().getRandomNumber();
-        int number = new RandomNumberGenerator().getRandomNumber();
-
-        return "Question: " + this.printProgression(size, step, number, randomMissedPosition) + "\n" + "Your answer: ";
+    public String getQuestion(String param) {
+        return "Question: " + param + "\n" + "Your answer: ";
     }
 
     @Override
-    public int getWinConditionCounterLimit() {
-        return WIN_CONDITION_COUNTER_LIMIT;
+    protected GameRule getRule() {
+        return Objects::equals;
     }
 
-    @Override
-    public boolean userAnswerIsCorrect(String userAnswer) {
-        return this.missedNumber == Integer.parseInt(userAnswer);
-    }
-
-    private String printProgression(int size, int step, int number, int randomMissedPosition) {
+    private Progression printProgression(int size, int step, int number, int randomMissedPosition) {
         StringBuilder progressionStr = new StringBuilder();
+
+        Progression progression = new Progression();
+
         for (int i = 0; i < size; i++) {
             if (i == randomMissedPosition) {
                 progressionStr.append(".." + " ");
-                this.missedNumber = number;
+                progression.setMissedNumber(number);
             } else {
                 progressionStr.append(number).append(" ");
             }
@@ -52,6 +72,8 @@ public final class ProgressionGame implements GameInterface {
             number += step;
         }
 
-        return progressionStr.toString();
+        progression.setProgression(progressionStr.toString());
+
+        return progression;
     }
 }

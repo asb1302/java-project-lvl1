@@ -4,7 +4,7 @@ public interface RandomNumberGeneratorInterface {
     int MIN_RANDOM_NUMBER = 1;
     int MAX_RANDOM_NUMBER = 10;
 
-    int getRandomNumber();
+    Integer getRandomNumber();
 
     RandomNumberGeneratorInterface setMinRandomNumber(int minRandomNumber);
 

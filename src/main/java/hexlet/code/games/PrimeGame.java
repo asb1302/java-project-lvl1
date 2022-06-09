@@ -1,11 +1,31 @@
 package hexlet.code.games;
 
+import hexlet.code.DTO.GameInfoDTO;
+import hexlet.code.DTO.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
+
 import java.util.Objects;
 
-public final class PrimeGame implements GameInterface {
+public final class PrimeGame extends BaseGame implements GameInterface {
+    @Override
+    public void play() {
+        for (int i = 0; i < this.BASIC_GAME_COUNT; i++) {
+            GameInfoDTO gameInfoDTO = new GameInfoDTO();
+            gameInfoDTO.setPreview(this.getPreview());
 
-    private int randomNumber;
+            Integer randomNumber = new RandomNumberGenerator().getRandomNumber();
+            gameInfoDTO.setQuestion(this.getQuestion(randomNumber.toString()));
+
+            String correctAnswer = this.checkNumberIsPrime(randomNumber) ? "yes" : "no";
+
+            gameInfoDTO.setAnswer(correctAnswer);
+            gameInfoDTO.setRule(this.getRule());
+
+            this.getGamesList().add(gameInfoDTO);
+        }
+
+        this.getEngine().execute(this.getGamesList());
+    }
 
     @Override
     public String getPreview() {
@@ -13,20 +33,12 @@ public final class PrimeGame implements GameInterface {
     }
 
     @Override
-    public String getQuestion() {
-        this.randomNumber = new RandomNumberGenerator().getRandomNumber();
-
-        return "Question: " + randomNumber + "\n";
+    public String getQuestion(String param) {
+        return "Question: " + param + "\n";
     }
-
     @Override
-    public int getWinConditionCounterLimit() {
-        return WIN_CONDITION_COUNTER_LIMIT;
-    }
-
-    @Override
-    public boolean userAnswerIsCorrect(String userAnswer) {
-        return Objects.equals(userAnswer, this.checkNumberIsPrime(randomNumber) ? "yes" : "no");
+    protected GameRule getRule() {
+        return Objects::equals;
     }
 
     private boolean checkNumberIsPrime(int number) {

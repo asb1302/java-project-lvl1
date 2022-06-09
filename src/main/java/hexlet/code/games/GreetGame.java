@@ -1,23 +1,28 @@
 package hexlet.code.games;
 
-public final class GreetGame implements GameInterface {
+import hexlet.code.DTO.GameInfoDTO;
+import hexlet.code.DTO.GameRule;
+
+public final class GreetGame extends BaseGame implements GameInterface {
     @Override
-    public String getPreview() {
+    public void play() {
+        GameInfoDTO gameInfoDTO = new GameInfoDTO();
+        this.getGamesList().add(gameInfoDTO);
+
+        this.getEngine().execute(this.getGamesList());
+    }
+
+    @Override
+    protected String getPreview() {
+        return null;
+    }
+    @Override
+    protected String getQuestion(String param) {
         return null;
     }
 
     @Override
-    public String getQuestion() {
+    protected GameRule getRule() {
         return null;
-    }
-
-    @Override
-    public int getWinConditionCounterLimit() {
-        return 0;
-    }
-
-    @Override
-    public boolean userAnswerIsCorrect(String userAnswer) {
-        return false;
     }
 }
