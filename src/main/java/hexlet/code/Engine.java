@@ -1,41 +1,44 @@
 package hexlet.code;
 
-import hexlet.code.games.GameInterface;
+import hexlet.code.DTO.GameInfo;
 
 import java.util.Scanner;
+import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public final class Engine implements GameEngineInterface {
-    @Override
-    public void play(GameInterface game) {
+
+    public void execute(List<GameInfo> gameInfoDTOList) {
         String username = this.greet();
 
-        String preview = game.getPreview();
+        boolean showGoodbye = false;
+        for (GameInfo gameInfoDTO : gameInfoDTOList) {
+            String preview = gameInfoDTO.getPreview();
 
-        if (null == preview) {
-            return;
-        }
+            if (null == preview) {
+                continue;
+            }
 
-        System.out.println(preview);
+            System.out.println(preview);
 
-        int correctAnswers = 0;
-        while (correctAnswers < game.getWinConditionCounterLimit()) {
-            System.out.print(game.getQuestion());
+            System.out.print(gameInfoDTO.getQuestion());
             String userAnswer = this.getScanner().nextLine();
 
-            if (game.userAnswerIsCorrect(userAnswer)) {
+            if (gameInfoDTO.getRule().isWon(userAnswer, gameInfoDTO.getAnswer())) {
                 System.out.println("Correct!");
-
-                correctAnswers++;
             } else {
                 this.sayGoodbye(username, false);
 
                 return;
             }
+
+            showGoodbye = true;
         }
 
-        this.sayGoodbye(username, true);
+        if (showGoodbye) {
+            this.sayGoodbye(username, true);
+        }
     }
 
     private Scanner getScanner() {
@@ -55,8 +58,8 @@ public final class Engine implements GameEngineInterface {
         return userName;
     }
 
-    private void sayGoodbye(String userName, boolean gameIsWon) {
-        if (gameIsWon) {
+    private void sayGoodbye(String userName, boolean isWon) {
+        if (isWon) {
             System.out.println("Congratulations, " + userName + "!");
         } else {
             System.out.println("Let's try again, " + userName + "!");

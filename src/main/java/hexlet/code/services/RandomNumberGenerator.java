@@ -24,7 +24,7 @@ public final class RandomNumberGenerator implements RandomNumberGeneratorInterfa
     }
 
     @Override
-    public int getRandomNumber() {
+    public Integer getRandomNumber() {
         return this.minRandomNumber + (int) (Math.random() * this.maxRandomNumber);
     }
 }
