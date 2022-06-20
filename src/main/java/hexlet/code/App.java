@@ -1,7 +1,6 @@
 package hexlet.code;
 
 import hexlet.code.games.ProgressionGame;
-import hexlet.code.games.GreetGame;
 import hexlet.code.games.EvenGame;
 import hexlet.code.games.GCDGame;
 import hexlet.code.games.CalcGame;
@@ -39,9 +38,12 @@ public class App {
         try {
             switch (input) {
                 case GREET_GAME_NUM -> {
-                    GameInterface game = new GreetGame();
+                    System.out.println("Welcome to the Brain Games!");
+                    System.out.print("May I have your name? ");
 
-                    game.play();
+                    String userName = scanner.nextLine();
+
+                    System.out.println("Hello, " + userName + "!");
                 }
                 case EVEN_GAME_NUM -> {
                     GameInterface game = new EvenGame();

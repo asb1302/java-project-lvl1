@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.DTO.GameInfo;
+import hexlet.code.domain.GameInfo;
 
 import java.util.Scanner;
 import java.util.List;
@@ -23,7 +23,7 @@ public final class Engine implements GameEngineInterface {
             System.out.println(preview);
 
             System.out.print(gameInfoDTO.getQuestion());
-            String userAnswer = this.getScanner().nextLine();
+            String userAnswer =  new Scanner(System.in, UTF_8.name()).nextLine();
 
             if (gameInfoDTO.getRule().isWon(userAnswer, gameInfoDTO.getAnswer())) {
                 System.out.println("Correct!");
@@ -39,10 +39,6 @@ public final class Engine implements GameEngineInterface {
         if (showGoodbye) {
             this.sayGoodbye(username, true);
         }
-    }
-
-    private Scanner getScanner() {
-        return new Scanner(System.in, UTF_8.name());
     }
 
     private String greet() {

@@ -1,7 +1,7 @@
 package hexlet.code.games;
 
-import hexlet.code.DTO.GameInfo;
-import hexlet.code.DTO.GameRule;
+import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.GameRule;
 import hexlet.code.Engine;
 
 import java.util.ArrayList;

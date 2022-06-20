@@ -1,7 +1,7 @@
 package hexlet.code.games;
 
-import hexlet.code.DTO.GameInfo;
-import hexlet.code.DTO.GameRule;
+import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
 
 import java.util.Objects;
@@ -10,18 +10,16 @@ public final class PrimeGame extends BaseGame implements GameInterface {
     @Override
     public void play() {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
-            GameInfo gameInfoDTO = new GameInfo();
-            gameInfoDTO.setPreview(this.getPreview());
-
             Integer randomNumber = new RandomNumberGenerator().getRandomNumber();
-            gameInfoDTO.setQuestion(this.getQuestion(randomNumber.toString()));
 
-            String correctAnswer = this.checkNumberIsPrime(randomNumber) ? "yes" : "no";
-
-            gameInfoDTO.setAnswer(correctAnswer);
-            gameInfoDTO.setRule(this.getRule());
-
-            this.getGamesList().add(gameInfoDTO);
+            this.getGamesList().add(
+                    new GameInfo(
+                            this.getPreview(),
+                            this.getQuestion(randomNumber.toString()),
+                            this.checkNumberIsPrime(randomNumber) ? "yes" : "no",
+                            this.getRule()
+                    )
+            );
         }
 
         this.getEngine().execute(this.getGamesList());
