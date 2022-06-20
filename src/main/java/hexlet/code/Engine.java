@@ -10,12 +10,12 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public final class Engine implements GameEngineInterface {
 
-    public void execute(List<GameInfo> gameInfoDTOList) {
+    public void execute(List<GameInfo> gameInfoList) {
         String username = this.greet();
 
         boolean showGoodbye = false;
-        for (GameInfo gameInfoDTO : gameInfoDTOList) {
-            String preview = gameInfoDTO.getPreview();
+        for (GameInfo gameInfo : gameInfoList) {
+            String preview = gameInfo.getPreview();
 
             if (null == preview) {
                 continue;
@@ -23,10 +23,10 @@ public final class Engine implements GameEngineInterface {
 
             System.out.println(preview);
 
-            System.out.print(gameInfoDTO.getQuestion());
+            System.out.print(gameInfo.getQuestion());
             String userAnswer =  new Scanner(System.in, UTF_8.name()).nextLine();
 
-            if (Objects.equals(userAnswer, gameInfoDTO.getAnswer())) {
+            if (Objects.equals(userAnswer, gameInfo.getAnswer())) {
                 System.out.println("Correct!");
             } else {
                 this.sayGoodbye(username, false);
