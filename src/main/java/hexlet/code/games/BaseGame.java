@@ -1,7 +1,6 @@
 package hexlet.code.games;
 
 import hexlet.code.domain.GameInfo;
-import hexlet.code.domain.GameRule;
 import hexlet.code.Engine;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public abstract class BaseGame {
 
     abstract String getPreview();
     abstract String getQuestion(String param);
-    abstract GameRule getRule();
 
     /**
      * Gel game engine.

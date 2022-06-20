@@ -1,10 +1,7 @@
 package hexlet.code.games;
 
 import hexlet.code.domain.GameInfo;
-import hexlet.code.domain.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
-
-import java.util.Objects;
 
 public final class EvenGame extends BaseGame implements GameInterface {
     @Override
@@ -16,8 +13,7 @@ public final class EvenGame extends BaseGame implements GameInterface {
                     new GameInfo(
                             this.getPreview(),
                             this.getQuestion(questionParam),
-                            Integer.parseInt(questionParam) % 2 == 0 ? "yes" : "no",
-                            this.getRule()
+                            Integer.parseInt(questionParam) % 2 == 0 ? "yes" : "no"
                     )
             );
         }
@@ -32,10 +28,5 @@ public final class EvenGame extends BaseGame implements GameInterface {
     @Override
     protected String getQuestion(String param) {
         return "Question: " + param + "\n";
-    }
-
-    @Override
-    protected GameRule getRule() {
-        return Objects::equals;
     }
 }

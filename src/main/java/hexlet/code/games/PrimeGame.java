@@ -1,10 +1,7 @@
 package hexlet.code.games;
 
 import hexlet.code.domain.GameInfo;
-import hexlet.code.domain.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
-
-import java.util.Objects;
 
 public final class PrimeGame extends BaseGame implements GameInterface {
     @Override
@@ -16,8 +13,7 @@ public final class PrimeGame extends BaseGame implements GameInterface {
                     new GameInfo(
                             this.getPreview(),
                             this.getQuestion(randomNumber.toString()),
-                            this.checkNumberIsPrime(randomNumber) ? "yes" : "no",
-                            this.getRule()
+                            this.checkNumberIsPrime(randomNumber) ? "yes" : "no"
                     )
             );
         }
@@ -33,10 +29,6 @@ public final class PrimeGame extends BaseGame implements GameInterface {
     @Override
     public String getQuestion(String param) {
         return "Question: " + param + "\n";
-    }
-    @Override
-    protected GameRule getRule() {
-        return Objects::equals;
     }
 
     private boolean checkNumberIsPrime(int number) {

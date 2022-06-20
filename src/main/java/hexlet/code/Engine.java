@@ -2,6 +2,7 @@ package hexlet.code;
 
 import hexlet.code.domain.GameInfo;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public final class Engine implements GameEngineInterface {
             System.out.print(gameInfoDTO.getQuestion());
             String userAnswer =  new Scanner(System.in, UTF_8.name()).nextLine();
 
-            if (gameInfoDTO.getRule().isWon(userAnswer, gameInfoDTO.getAnswer())) {
+            if (Objects.equals(userAnswer, gameInfoDTO.getAnswer())) {
                 System.out.println("Correct!");
             } else {
                 this.sayGoodbye(username, false);

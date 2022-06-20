@@ -1,11 +1,8 @@
 package hexlet.code.games;
 
 import hexlet.code.domain.GameInfo;
-import hexlet.code.domain.GameRule;
 import hexlet.code.domain.Progression;
 import hexlet.code.services.RandomNumberGenerator;
-
-import java.util.Objects;
 
 public final class ProgressionGame extends BaseGame implements GameInterface {
     private static final int MIN_PROGRESSION_SIZE = 5;
@@ -32,8 +29,7 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
                     new GameInfo(
                             this.getPreview(),
                             this.getQuestion(progression.getProgression()),
-                            progression.getMissedNumber().toString(),
-                            this.getRule()
+                            progression.getMissedNumber().toString()
                     )
             );
         }
@@ -49,11 +45,6 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
     @Override
     public String getQuestion(String param) {
         return "Question: " + param + "\n" + "Your answer: ";
-    }
-
-    @Override
-    protected GameRule getRule() {
-        return Objects::equals;
     }
 
     private Progression printProgression(int size, int step, int number, int randomMissedPosition) {

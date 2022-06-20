@@ -1,7 +1,6 @@
 package hexlet.code.games;
 
 import hexlet.code.domain.GameInfo;
-import hexlet.code.domain.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
 
 public final class CalcGame extends BaseGame implements GameInterface {
@@ -31,8 +30,7 @@ public final class CalcGame extends BaseGame implements GameInterface {
                     new GameInfo(
                             this.getPreview(),
                             this.getQuestion(questionParam),
-                            correctAnswer.toString(),
-                            this.getRule()
+                            correctAnswer.toString()
                     )
             );
         }
@@ -48,11 +46,6 @@ public final class CalcGame extends BaseGame implements GameInterface {
     @Override
     protected String getQuestion(String param) {
         return "Question: " + param + "\n" + "Answer: ";
-    }
-
-    @Override
-    protected GameRule getRule() {
-        return (userAnswer, correctAnswer) -> Integer.parseInt(userAnswer) == Integer.parseInt(correctAnswer);
     }
 
     private Integer calculateCorrectAnswer(int firstRandomNumber, int secondRandomNumber, String randomOperator) {

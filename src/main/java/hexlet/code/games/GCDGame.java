@@ -1,9 +1,7 @@
 package hexlet.code.games;
 
 import hexlet.code.domain.GameInfo;
-import hexlet.code.domain.GameRule;
 import hexlet.code.services.RandomNumberGenerator;
-import java.util.Objects;
 
 public final class GCDGame extends BaseGame implements GameInterface {
     @Override
@@ -20,8 +18,7 @@ public final class GCDGame extends BaseGame implements GameInterface {
                     new GameInfo(
                             this.getPreview(),
                             this.getQuestion(questionParam),
-                            Integer.toString(correctAnswer),
-                            this.getRule()
+                            Integer.toString(correctAnswer)
                     )
             );
         }
@@ -37,11 +34,6 @@ public final class GCDGame extends BaseGame implements GameInterface {
     @Override
     public String getQuestion(String param) {
         return "Question: " + param + " " + "\n";
-    }
-
-    @Override
-    protected GameRule getRule() {
-        return Objects::equals;
     }
 
     private static int gcdByEuclidsAlgorithm(int n1, int n2) {
