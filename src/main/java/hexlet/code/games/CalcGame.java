@@ -1,6 +1,6 @@
 package hexlet.code.games;
 
-import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.Game;
 import hexlet.code.services.RandomNumberGenerator;
 
 public final class CalcGame extends BaseGame implements GameInterface {
@@ -26,20 +26,19 @@ public final class CalcGame extends BaseGame implements GameInterface {
 
             String questionParam = firstRandomNumber + " " + randomOperator + " " + secondRandomNumber;
 
-            this.getGamesList().add(
-                    new GameInfo(
-                            this.getPreview(),
+            this.getGamesData().add(
+                    new Game(
                             this.getQuestion(questionParam),
                             correctAnswer.toString()
                     )
             );
         }
 
-        this.getEngine().execute(this.getGamesList());
+        this.getEngine().execute(this.getGamesData(), this.getRule());
     }
 
     @Override
-    protected String getPreview() {
+    protected String getRule() {
         return "What is the result of the expression?";
     }
 

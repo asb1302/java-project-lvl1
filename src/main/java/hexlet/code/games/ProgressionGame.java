@@ -1,6 +1,6 @@
 package hexlet.code.games;
 
-import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.Game;
 import hexlet.code.domain.Progression;
 import hexlet.code.services.RandomNumberGenerator;
 
@@ -25,20 +25,19 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
             Progression progression = this.printProgression(size, step, number, randomMissedPosition);
 
 
-            this.getGamesList().add(
-                    new GameInfo(
-                            this.getPreview(),
+            this.getGamesData().add(
+                    new Game(
                             this.getQuestion(progression.getProgression()),
                             progression.getMissedNumber().toString()
                     )
             );
         }
 
-        this.getEngine().execute(this.getGamesList());
+        this.getEngine().execute(this.getGamesData(), this.getRule());
     }
 
     @Override
-    public String getPreview() {
+    public String getRule() {
         return "What number is missing in this progression?";
     }
 

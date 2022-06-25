@@ -1,6 +1,6 @@
 package hexlet.code.games;
 
-import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.Game;
 import hexlet.code.Engine;
 
 import java.util.ArrayList;
@@ -10,14 +10,14 @@ public abstract class BaseGame {
     protected static final int BASIC_GAME_COUNT = 3;
     private final Engine engine;
 
-    private final List<GameInfo> gamesList;
+    private final List<Game> gamesData;
 
     public BaseGame() {
         this.engine = new Engine();
-        this.gamesList = new ArrayList<>();
+        this.gamesData = new ArrayList<>();
     }
 
-    abstract String getPreview();
+    abstract String getRule();
     abstract String getQuestion(String param);
 
     /**
@@ -35,7 +35,7 @@ public abstract class BaseGame {
      *
      * @return game list
      */
-    protected List<GameInfo> getGamesList() {
-        return gamesList;
+    protected List<Game> getGamesData() {
+        return gamesData;
     }
 }

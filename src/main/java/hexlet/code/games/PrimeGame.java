@@ -1,6 +1,6 @@
 package hexlet.code.games;
 
-import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.Game;
 import hexlet.code.services.RandomNumberGenerator;
 
 public final class PrimeGame extends BaseGame implements GameInterface {
@@ -9,20 +9,19 @@ public final class PrimeGame extends BaseGame implements GameInterface {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
             Integer randomNumber = new RandomNumberGenerator().getRandomNumber();
 
-            this.getGamesList().add(
-                    new GameInfo(
-                            this.getPreview(),
+            this.getGamesData().add(
+                    new Game(
                             this.getQuestion(randomNumber.toString()),
                             this.checkNumberIsPrime(randomNumber) ? "yes" : "no"
                     )
             );
         }
 
-        this.getEngine().execute(this.getGamesList());
+        this.getEngine().execute(this.getGamesData(), this.getRule());
     }
 
     @Override
-    public String getPreview() {
+    public String getRule() {
         return "Answer 'yes' if number prime otherwise answer 'no'.";
     }
 

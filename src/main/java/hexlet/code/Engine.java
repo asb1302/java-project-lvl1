@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.domain.GameInfo;
+import hexlet.code.domain.Game;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -10,56 +10,25 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public final class Engine implements GameEngineInterface {
 
-    public void execute(List<GameInfo> gameInfoList) {
-        String username = this.greet();
+    @Override
+    public void execute(List<Game> gamesData, String rule) {
+        String username = Cli.greet();
 
-        boolean showGoodbye = false;
-        for (GameInfo gameInfo : gameInfoList) {
-            String preview = gameInfo.getPreview();
+        System.out.println(rule);
 
-            if (null == preview) {
-                continue;
-            }
-
-            System.out.println(preview);
-
-            System.out.print(gameInfo.getQuestion());
+        for (Game game : gamesData) {
+            System.out.print(game.getQuestion());
             String userAnswer =  new Scanner(System.in, UTF_8.name()).nextLine();
 
-            if (Objects.equals(userAnswer, gameInfo.getAnswer())) {
+            if (Objects.equals(userAnswer, game.getAnswer())) {
                 System.out.println("Correct!");
             } else {
-                this.sayGoodbye(username, false);
+                Cli.sayGoodbye(username, false);
 
                 return;
             }
-
-            showGoodbye = true;
         }
 
-        if (showGoodbye) {
-            this.sayGoodbye(username, true);
-        }
-    }
-
-    private String greet() {
-        System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name? ");
-
-        Scanner scanner = new Scanner(System.in, UTF_8.name());
-
-        String userName = scanner.nextLine();
-
-        System.out.println("Hello, " + userName + "!");
-
-        return userName;
-    }
-
-    private void sayGoodbye(String userName, boolean isWon) {
-        if (isWon) {
-            System.out.println("Congratulations, " + userName + "!");
-        } else {
-            System.out.println("Let's try again, " + userName + "!");
-        }
+        Cli.sayGoodbye(username, true);
     }
 }

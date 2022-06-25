@@ -1,9 +1,9 @@
 package hexlet.code;
 
+import hexlet.code.domain.Game;
+
+import java.util.List;
+
 public interface GameEngineInterface {
-//    void play(GameInterface game);
-
-    // Тут все методы для расчета выйгрышла
-
-    // оставить только метод execute
+    void execute(List<Game> gameInfoList, String rule);
 }

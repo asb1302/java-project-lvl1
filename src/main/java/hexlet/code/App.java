@@ -38,12 +38,7 @@ public class App {
         try {
             switch (input) {
                 case GREET_GAME_NUM -> {
-                    System.out.println("Welcome to the Brain Games!");
-                    System.out.print("May I have your name? ");
-
-                    String userName = scanner.nextLine();
-
-                    System.out.println("Hello, " + userName + "!");
+                    Cli.greet();
                 }
                 case EVEN_GAME_NUM -> {
                     GameInterface game = new EvenGame();
