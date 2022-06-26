@@ -5,17 +5,20 @@ import java.util.Scanner;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class Cli {
-    public static String greet() {
+    public static void welcome() {
         System.out.println("Welcome to the Brain Games!");
+    }
+
+    public static String getUserName() {
         System.out.print("May I have your name? ");
 
         Scanner scanner = new Scanner(System.in, UTF_8.name());
 
-        String userName = scanner.nextLine();
+        return scanner.nextLine();
+    }
 
+    public static void greet(String userName) {
         System.out.println("Hello, " + userName + "!");
-
-        return userName;
     }
 
     public static void sayGoodbye(String userName, boolean isWon) {

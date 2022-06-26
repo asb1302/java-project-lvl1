@@ -38,7 +38,9 @@ public class App {
         try {
             switch (input) {
                 case GREET_GAME_NUM -> {
-                    Cli.greet();
+                    Cli.welcome();
+                    String userName = Cli.getUserName();
+                    Cli.greet(userName);
                 }
                 case EVEN_GAME_NUM -> {
                     GameInterface game = new EvenGame();

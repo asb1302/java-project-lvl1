@@ -7,7 +7,8 @@ public final class EvenGame extends BaseGame implements GameInterface {
     @Override
     public void play() {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
-            String question = new RandomNumberGenerator().getRandomNumber().toString();
+            String question = new RandomNumberGenerator()
+                    .getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER).toString();
 
             this.getGamesData().add(
                     new Game(

@@ -15,12 +15,10 @@ public final class CalcGame extends BaseGame implements GameInterface {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
             String randomOperator = operators[
                     new RandomNumberGenerator()
-                            .setMinRandomNumber(0)
-                            .setMaxRandomNumber(operators.length)
-                            .getRandomNumber()
+                            .getRandomNumber(0, operators.length)
                     ];
-            int firstRandomNumber = new RandomNumberGenerator().getRandomNumber();
-            int secondRandomNumber = new RandomNumberGenerator().getRandomNumber();
+            int firstRandomNumber = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+            int secondRandomNumber = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
 
             Integer correctAnswer = this.calculateCorrectAnswer(firstRandomNumber, secondRandomNumber, randomOperator);
 

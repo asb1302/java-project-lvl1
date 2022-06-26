@@ -12,7 +12,9 @@ public final class Engine implements GameEngineInterface {
 
     @Override
     public void execute(List<Game> gamesData, String rule) {
-        String username = Cli.greet();
+        Cli.welcome();
+        String userName = Cli.getUserName();
+        Cli.greet(userName);
 
         System.out.println(rule);
 
@@ -24,12 +26,12 @@ public final class Engine implements GameEngineInterface {
             if (Objects.equals(userAnswer, game.getAnswer())) {
                 System.out.println("Correct!");
             } else {
-                Cli.sayGoodbye(username, false);
+                Cli.sayGoodbye(userName, false);
 
                 return;
             }
         }
 
-        Cli.sayGoodbye(username, true);
+        Cli.sayGoodbye(userName, true);
     }
 }
