@@ -10,13 +10,13 @@ public final class GCDGame extends BaseGame implements GameInterface {
             int firstRandomNumber = new RandomNumberGenerator().getRandomNumber();
             int secondRandomNumber = new RandomNumberGenerator().getRandomNumber();
 
-            String questionParam = firstRandomNumber + " " + secondRandomNumber;
+            String question = firstRandomNumber + " " + secondRandomNumber;
 
             int correctAnswer = gcdByEuclidsAlgorithm(firstRandomNumber, secondRandomNumber);
 
             this.getGamesData().add(
                     new Game(
-                            this.getQuestion(questionParam),
+                            question,
                             Integer.toString(correctAnswer)
                     )
             );
@@ -28,11 +28,6 @@ public final class GCDGame extends BaseGame implements GameInterface {
     @Override
     public String getRule() {
         return "Find the greatest common divisor of given numbers.";
-    }
-
-    @Override
-    public String getQuestion(String param) {
-        return "Question: " + param + " " + "\n";
     }
 
     private static int gcdByEuclidsAlgorithm(int n1, int n2) {

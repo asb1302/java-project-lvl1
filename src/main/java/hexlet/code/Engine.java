@@ -17,7 +17,8 @@ public final class Engine implements GameEngineInterface {
         System.out.println(rule);
 
         for (Game game : gamesData) {
-            System.out.print(game.getQuestion());
+            System.out.println("Question: " + game.getQuestion());
+            System.out.print("Answer: ");
             String userAnswer =  new Scanner(System.in, UTF_8.name()).nextLine();
 
             if (Objects.equals(userAnswer, game.getAnswer())) {

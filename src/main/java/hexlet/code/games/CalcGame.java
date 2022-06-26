@@ -24,11 +24,11 @@ public final class CalcGame extends BaseGame implements GameInterface {
 
             Integer correctAnswer = this.calculateCorrectAnswer(firstRandomNumber, secondRandomNumber, randomOperator);
 
-            String questionParam = firstRandomNumber + " " + randomOperator + " " + secondRandomNumber;
+            String question = firstRandomNumber + " " + randomOperator + " " + secondRandomNumber;
 
             this.getGamesData().add(
                     new Game(
-                            this.getQuestion(questionParam),
+                            question,
                             correctAnswer.toString()
                     )
             );
@@ -40,11 +40,6 @@ public final class CalcGame extends BaseGame implements GameInterface {
     @Override
     protected String getRule() {
         return "What is the result of the expression?";
-    }
-
-    @Override
-    protected String getQuestion(String param) {
-        return "Question: " + param + "\n" + "Answer: ";
     }
 
     private Integer calculateCorrectAnswer(int firstRandomNumber, int secondRandomNumber, String randomOperator) {

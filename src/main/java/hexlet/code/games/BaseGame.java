@@ -18,7 +18,6 @@ public abstract class BaseGame {
     }
 
     abstract String getRule();
-    abstract String getQuestion(String param);
 
     /**
      * Gel game engine.

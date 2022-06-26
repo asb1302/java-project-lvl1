@@ -11,7 +11,7 @@ public final class PrimeGame extends BaseGame implements GameInterface {
 
             this.getGamesData().add(
                     new Game(
-                            this.getQuestion(randomNumber.toString()),
+                            randomNumber.toString(),
                             this.checkNumberIsPrime(randomNumber) ? "yes" : "no"
                     )
             );
@@ -23,11 +23,6 @@ public final class PrimeGame extends BaseGame implements GameInterface {
     @Override
     public String getRule() {
         return "Answer 'yes' if number prime otherwise answer 'no'.";
-    }
-
-    @Override
-    public String getQuestion(String param) {
-        return "Question: " + param + "\n";
     }
 
     private boolean checkNumberIsPrime(int number) {

@@ -24,10 +24,9 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
 
             Progression progression = this.printProgression(size, step, number, randomMissedPosition);
 
-
             this.getGamesData().add(
                     new Game(
-                            this.getQuestion(progression.getProgression()),
+                            progression.getProgression(),
                             progression.getMissedNumber().toString()
                     )
             );
@@ -39,11 +38,6 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
     @Override
     public String getRule() {
         return "What number is missing in this progression?";
-    }
-
-    @Override
-    public String getQuestion(String param) {
-        return "Question: " + param + "\n" + "Your answer: ";
     }
 
     private Progression printProgression(int size, int step, int number, int randomMissedPosition) {
