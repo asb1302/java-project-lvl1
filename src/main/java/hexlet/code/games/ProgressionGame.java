@@ -4,6 +4,9 @@ import hexlet.code.domain.Game;
 import hexlet.code.services.RandomNumberGenerator;
 
 public final class ProgressionGame extends BaseGame implements GameInterface {
+    public ProgressionGame() {
+        super("What number is missing in this progression?");
+    }
     private static final int MIN_PROGRESSION_SIZE = 5;
     private static final int MAX_PROGRESSION_SIZE = 10;
 
@@ -17,7 +20,7 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
             int step = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             int number = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
 
-            this.getGamesData().add(
+            this.addGame(
                     new Game(
                             this.createProgression(size, step, number, randomMissedPosition),
                             this.calculateMissedNumber(step, randomMissedPosition, number)
@@ -25,12 +28,7 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
             );
         }
 
-        this.getEngine().execute(this.getGamesData(), this.getRule());
-    }
-
-    @Override
-    public String getRule() {
-        return "What number is missing in this progression?";
+        this.execute();
     }
 
     private String createProgression(int size, int step, int number, int randomMissedPosition) {

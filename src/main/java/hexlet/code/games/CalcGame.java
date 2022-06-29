@@ -8,6 +8,10 @@ public final class CalcGame extends BaseGame implements GameInterface {
     public static final String SUBTRACTION_OPERATOR = "-";
     public static final String ADDITION_OPERATOR = "+";
 
+    public CalcGame() {
+        super("What is the result of the expression?");
+    }
+
     @Override
     public void play() {
         String[] operators = {ADDITION_OPERATOR, SUBTRACTION_OPERATOR, MULTIPLICATION_OPERATOR};
@@ -24,7 +28,7 @@ public final class CalcGame extends BaseGame implements GameInterface {
 
             String question = firstRandomNumber + " " + randomOperator + " " + secondRandomNumber;
 
-            this.getGamesData().add(
+            this.addGame(
                     new Game(
                             question,
                             correctAnswer.toString()
@@ -32,12 +36,7 @@ public final class CalcGame extends BaseGame implements GameInterface {
             );
         }
 
-        this.getEngine().execute(this.getGamesData(), this.getRule());
-    }
-
-    @Override
-    protected String getRule() {
-        return "What is the result of the expression?";
+        this.execute();
     }
 
     private Integer calculateCorrectAnswer(int firstRandomNumber, int secondRandomNumber, String randomOperator) {

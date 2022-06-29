@@ -4,12 +4,15 @@ import hexlet.code.domain.Game;
 import hexlet.code.services.RandomNumberGenerator;
 
 public final class PrimeGame extends BaseGame implements GameInterface {
+    public PrimeGame() {
+        super("Answer 'yes' if number prime otherwise answer 'no'.");
+    }
     @Override
     public void play() {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
             Integer randomNumber = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
 
-            this.getGamesData().add(
+            this.addGame(
                     new Game(
                             randomNumber.toString(),
                             this.checkNumberIsPrime(randomNumber) ? "yes" : "no"
@@ -17,12 +20,7 @@ public final class PrimeGame extends BaseGame implements GameInterface {
             );
         }
 
-        this.getEngine().execute(this.getGamesData(), this.getRule());
-    }
-
-    @Override
-    public String getRule() {
-        return "Answer 'yes' if number prime otherwise answer 'no'.";
+        this.execute();
     }
 
     private boolean checkNumberIsPrime(int number) {

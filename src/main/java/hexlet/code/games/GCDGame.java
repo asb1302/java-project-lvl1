@@ -4,6 +4,9 @@ import hexlet.code.domain.Game;
 import hexlet.code.services.RandomNumberGenerator;
 
 public final class GCDGame extends BaseGame implements GameInterface {
+    public GCDGame() {
+        super("Find the greatest common divisor of given numbers.");
+    }
     @Override
     public void play() {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
@@ -14,7 +17,7 @@ public final class GCDGame extends BaseGame implements GameInterface {
 
             int correctAnswer = gcdByEuclidsAlgorithm(firstRandomNumber, secondRandomNumber);
 
-            this.getGamesData().add(
+            this.addGame(
                     new Game(
                             question,
                             Integer.toString(correctAnswer)
@@ -22,12 +25,7 @@ public final class GCDGame extends BaseGame implements GameInterface {
             );
         }
 
-        this.getEngine().execute(this.getGamesData(), this.getRule());
-    }
-
-    @Override
-    public String getRule() {
-        return "Find the greatest common divisor of given numbers.";
+        this.execute();
     }
 
     private static int gcdByEuclidsAlgorithm(int n1, int n2) {
