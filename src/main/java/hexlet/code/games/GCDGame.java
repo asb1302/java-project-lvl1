@@ -10,8 +10,8 @@ public final class GCDGame extends BaseGame implements GameInterface {
     @Override
     public void play() {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
-            int firstRandomNumber = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
-            int secondRandomNumber = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+            int firstRandomNumber = RandomNumberGenerator.getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+            int secondRandomNumber = RandomNumberGenerator.getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
 
             String question = firstRandomNumber + " " + secondRandomNumber;
 

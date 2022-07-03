@@ -13,10 +13,8 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
     @Override
     public void play() {
         for (int i = 0; i < BASIC_GAME_COUNT; i++) {
-            int size = new RandomNumberGenerator()
-                    .getRandomNumber(MIN_PROGRESSION_SIZE, MAX_PROGRESSION_SIZE);
-            int randomMissedPosition = new RandomNumberGenerator()
-                    .getRandomNumber(0, size);
+            int size = RandomNumberGenerator.getRandomNumber(MIN_PROGRESSION_SIZE, MAX_PROGRESSION_SIZE);
+            int randomMissedPosition = RandomNumberGenerator.getRandomNumber(0, size);
 
             int[] progressionArray = this.createProgressionArray(size);
 
@@ -32,8 +30,8 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
     }
 
     private int[] createProgressionArray(int size) {
-        int step = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
-        int number = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+        int step = RandomNumberGenerator.getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+        int number = RandomNumberGenerator.getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
 
         int[] progressionArray = new int[size];
 
