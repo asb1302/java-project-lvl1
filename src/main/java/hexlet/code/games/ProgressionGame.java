@@ -17,13 +17,13 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
                     .getRandomNumber(MIN_PROGRESSION_SIZE, MAX_PROGRESSION_SIZE);
             int randomMissedPosition = new RandomNumberGenerator()
                     .getRandomNumber(0, size);
-            int step = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
-            int number = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+
+            int[] progressionArray = this.createProgressionArray(size);
 
             this.addGame(
                     new Game(
-                            this.createProgression(size, step, number, randomMissedPosition),
-                            this.calculateMissedNumber(step, randomMissedPosition, number)
+                            this.createProgressionStr(progressionArray, randomMissedPosition),
+                            Integer.toString(progressionArray[randomMissedPosition])
                     )
             );
         }
@@ -31,23 +31,32 @@ public final class ProgressionGame extends BaseGame implements GameInterface {
         this.execute();
     }
 
-    private String createProgression(int size, int step, int number, int randomMissedPosition) {
-        StringBuilder progressionStr = new StringBuilder();
+    private int[] createProgressionArray(int size) {
+        int step = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+        int number = new RandomNumberGenerator().getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+
+        int[] progressionArray = new int[size];
 
         for (int i = 0; i < size; i++) {
-            if (i == randomMissedPosition) {
-                progressionStr.append(".." + " ");
-            } else {
-                progressionStr.append(number).append(" ");
-            }
+            progressionArray[i] = number;
 
             number += step;
         }
 
-        return progressionStr.toString();
+        return progressionArray;
     }
 
-    private String calculateMissedNumber(int step, int randomMissedPosition, int number) {
-        return Integer.toString(number + (step * randomMissedPosition));
+    private String createProgressionStr(int[] progressionArray, int randomMissedPosition) {
+        StringBuilder progressionStr = new StringBuilder();
+
+        for (int i = 0; i < progressionArray.length; i++) {
+            if (i == randomMissedPosition) {
+                progressionStr.append(".." + " ");
+            } else {
+                progressionStr.append(progressionArray[i]).append(" ");
+            }
+        }
+
+        return progressionStr.toString();
     }
 }
